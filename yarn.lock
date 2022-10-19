@@ -1321,6 +1321,13 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@testing-library/react-native@^11.2.0":
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/@testing-library/react-native/-/react-native-11.2.0.tgz#5408a745d71f87509763d73914c38db383094bdd"
+  integrity sha512-j3t78/htRkjPJjLlEjh9VxIAvcCJ85CG2L8mKH1mz9F3gyH65MH/JScOY2RHGOkTHGAGh5c+53Dw4u7J1WEJSA==
+  dependencies:
+    pretty-format "^29.0.3"
+
 "@tootallnate/once@1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
@@ -5493,7 +5500,7 @@ pretty-format@^26.5.2, pretty-format@^26.6.2:
     ansi-styles "^4.0.0"
     react-is "^17.0.1"
 
-pretty-format@^29.0.0, pretty-format@^29.2.0:
+pretty-format@^29.0.0, pretty-format@^29.0.3, pretty-format@^29.2.0:
   version "29.2.0"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-29.2.0.tgz#1d4ea56fb46079b44efd9ed59c14f70f2950a61b"
   integrity sha512-QCSUFdwOi924g24czhOH5eTkXxUCqlLGZBRCySlwDYHIXRJkdGyjJc9nZaqhlFBZws8dq5Dvk0lCilsmlfsPxw==
