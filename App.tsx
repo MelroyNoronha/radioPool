@@ -1,14 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, Button} from 'react-native';
 import {Auth0Provider, useAuth0} from 'react-native-auth0';
 import {AUTH0_DOMAIN, AUTH0_CLIENT_ID} from 'react-native-dotenv';
 
 const Home = () => {
-  const {authorize} = useAuth0();
+  const {authorize, clearSession} = useAuth0();
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
-  const onPress = async () => {
+  const startLogin = async () => {
     try {
       await authorize();
+      setIsAuthorized(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const startLogout = async () => {
+    try {
+      await clearSession();
+      setIsAuthorized(false);
     } catch (err) {
       console.log(err);
     }
@@ -16,7 +27,8 @@ const Home = () => {
 
   return (
     <SafeAreaView>
-      <Button onPress={onPress} title="Log in" />
+      {!isAuthorized && <Button onPress={startLogin} title="Log In" />}
+      {isAuthorized && <Button onPress={startLogout} title="Log Out" />}
     </SafeAreaView>
   );
 };
