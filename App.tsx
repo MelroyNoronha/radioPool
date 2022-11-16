@@ -2,6 +2,7 @@ import React from 'react';
 import {SafeAreaView, Button} from 'react-native';
 import {SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET} from 'react-native-dotenv';
 import {authorize} from 'react-native-app-auth';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 const App: React.FC = () => {
   const signInToSpotify = async () => {
@@ -23,6 +24,18 @@ const App: React.FC = () => {
     try {
       const authState = await authorize(config);
       const {accessToken, refreshToken} = authState;
+
+      try {
+        await EncryptedStorage.setItem(
+          'userSession',
+          JSON.stringify({
+            accessToken,
+            refreshToken,
+          }),
+        );
+      } catch (err) {
+        console.error(err);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -30,7 +43,7 @@ const App: React.FC = () => {
 
   return (
     <SafeAreaView>
-      <Button onPress={signInToSpotify} title="Sign in to Spotify" />
+      <Button onPress={signInToSpotify} title={'Sign in to Spotify'} />
     </SafeAreaView>
   );
 };
