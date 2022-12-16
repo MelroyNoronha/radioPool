@@ -1,11 +1,11 @@
 import React from 'react';
-import {render} from '@testing-library/react-native';
+import {renderWithProviders} from '../../utils/test-utils';
 
 import SignInScreen from '../SignInScreen';
 
 describe('SignIn Screen', () => {
   it('Should render a button with text Sign in to Spotify', () => {
-    const {getByText} = render(<SignInScreen />);
+    const {getByText} = renderWithProviders(<SignInScreen />);
 
     getByText('Sign in to Spotify');
   });
