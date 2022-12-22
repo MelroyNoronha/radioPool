@@ -1,15 +1,18 @@
 import React from 'react';
 import {View, Text, Button} from 'react-native';
+import {useDispatch} from 'react-redux';
 
-import {useAppDispatch} from '../redux/hooks';
 import {removeUserSession} from '../redux/auth/authSlice';
 
-export default ({navigation}) => {
-  const dispatch = useAppDispatch();
+export default () => {
+  const dispatch = useDispatch();
 
   const logOut = async () => {
-    dispatch(removeUserSession());
-    navigation.navigate('SignIn');
+    try {
+      dispatch(removeUserSession());
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

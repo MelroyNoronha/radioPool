@@ -1,16 +1,16 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+import {selectAccessToken} from '../redux/auth/authSlice';
 import AuthStack from './AuthStack';
 import AppStack from './AppStack';
-import {selectUserSession} from '../redux/auth/authSlice';
-import {useAppSelector} from '../redux/hooks';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
-  const {accessToken} = useAppSelector(selectUserSession);
+  const accessToken = useSelector(selectAccessToken);
 
   return (
     <NavigationContainer>

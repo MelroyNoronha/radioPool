@@ -1,7 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import type {RootState} from '../store';
-import EncryptedStorage from 'react-native-encrypted-storage';
-import {useNavigation} from '@react-navigation/native';
 
 interface UserSession {
   accessToken: string;
@@ -24,34 +22,9 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUserSession: (state, action: PayloadAction<UserSession>) => {
-      const {accessToken, refreshToken} = action.payload;
-      const setInSecureStorage = async () => {
-        try {
-          await EncryptedStorage.setItem(
-            'userSession',
-            JSON.stringify({
-              accessToken,
-              refreshToken,
-            }),
-          );
-        } catch (err) {
-          console.error(err);
-        }
-      };
-      setInSecureStorage();
-
       state.userSession = action.payload;
     },
     removeUserSession: state => {
-      const removeFromSecureStorage = async () => {
-        try {
-          await EncryptedStorage.removeItem('user_session');
-        } catch (err) {
-          console.error(err);
-        }
-      };
-      removeFromSecureStorage();
-
       state.userSession = {accessToken: '', refreshToken: ''};
     },
   },
