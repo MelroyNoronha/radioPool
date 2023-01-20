@@ -1,5 +1,6 @@
 import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit';
 import {
+  persistStore,
   persistReducer,
   FLUSH,
   REHYDRATE,
@@ -29,6 +30,8 @@ export const store = configureStore({
       },
     }),
 });
+
+export const persistor = persistStore(store);
 
 export type AppStore = typeof store;
 export type AppDispatch = typeof store.dispatch;
