@@ -1,12 +1,12 @@
 import React from 'react';
 import {SafeAreaView, Button} from 'react-native';
-import {SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET} from 'react-native-dotenv';
+import {SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET} from '@env';
 import {authorize} from 'react-native-app-auth';
 import {useDispatch} from 'react-redux';
 
 import {setUserSession} from '../redux/auth/authSlice';
 
-export default ({navigation}) => {
+export default () => {
   const dispatch = useDispatch();
 
   const signInToSpotify = async () => {
