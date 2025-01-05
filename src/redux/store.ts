@@ -12,7 +12,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import reducers from './reducers';
-
+import {spotifyApi} from '../services/spotifyApi';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -28,7 +28,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(spotifyApi.middleware),
 });
 
 export const persistor = persistStore(store);

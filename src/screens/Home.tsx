@@ -1,24 +1,40 @@
-import React from 'react';
-import {View, Text, Button} from 'react-native';
+import React, {useCallback} from 'react';
+import {View, Text, Button, StyleSheet} from 'react-native';
 import {useDispatch} from 'react-redux';
 
 import {removeUserSession} from '../redux/auth/authSlice';
+import {useGetSpotifyProfileQuery} from '../services/spotifyApi';
 
 export default () => {
   const dispatch = useDispatch();
 
-  const logOut = async () => {
-    try {
-      dispatch(removeUserSession());
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const {data: spotifyProfile, isLoading} = useGetSpotifyProfileQuery();
+
+  const logOut = useCallback(() => {
+    dispatch(removeUserSession());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
   return (
-    <View>
-      <Text>Welcome Home</Text>
+    <View style={styles.container}>
+      <Text>Welcome {spotifyProfile?.display_name}!</Text>
       <Button title="Log Out" onPress={logOut} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+});
