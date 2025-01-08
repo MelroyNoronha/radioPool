@@ -12,5 +12,22 @@ module.exports = {
         allowUndefined: true,
       },
     ],
+    [
+      'module-resolver',
+      {
+        root: ['.'],
+        extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
+        alias: {
+          '@/': './src',
+          '@constants': './src/constants',
+          '@navigation': './src/navigation',
+          '@redux': './src/redux',
+          '@screens': './src/screens',
+          '@services': './src/services',
+          '@types': './src/types',
+          '@utils': './src/utils',
+        },
+      },
+    ],
   ],
 };

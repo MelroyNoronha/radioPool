@@ -4,7 +4,7 @@ import {SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET} from '@env';
 import {authorize} from 'react-native-app-auth';
 import {useDispatch} from 'react-redux';
 
-import {setUserSession} from '../redux/auth/authSlice';
+import {setUserSession} from '@redux/auth/authSlice';
 
 export default () => {
   const dispatch = useDispatch();

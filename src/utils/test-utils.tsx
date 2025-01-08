@@ -17,8 +17,8 @@ import {
 import {PersistGate} from 'redux-persist/lib/integration/react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import type {AppStore, RootState} from '../redux/store';
-import reducers from '../redux/reducers';
+import type {AppStore, RootState} from '@redux/store';
+import reducers from '@redux/reducers';
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.

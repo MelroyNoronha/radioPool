@@ -2,8 +2,8 @@ import React, {useCallback} from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import {useDispatch} from 'react-redux';
 
-import {removeUserSession} from '../redux/auth/authSlice';
-import {useGetSpotifyProfileQuery} from '../services/spotifyApi';
+import {removeUserSession} from '@redux/auth/authSlice';
+import {useGetSpotifyProfileQuery} from '@services/spotifyApi';
 
 export default () => {
   const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-import {RootState} from '../redux/store';
-import {removeUserSession} from '../redux/auth/authSlice';
-import {SPOTIFY_API_BASE_URL, SPOTIFY_PROFILE_ENDPOINT} from '../constants';
+import {RootState} from '@redux/store';
+import {removeUserSession} from '@redux/auth/authSlice';
+import {SPOTIFY_API_BASE_URL, SPOTIFY_PROFILE_ENDPOINT} from '@constants';
 
 interface SpotifyProfile {
   /**
