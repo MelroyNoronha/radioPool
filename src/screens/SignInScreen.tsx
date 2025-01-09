@@ -18,6 +18,10 @@ export default () => {
         'user-read-email',
         'playlist-modify-public',
         'user-read-private',
+        'user-read-currently-playing',
+        'user-read-playback-state',
+        'user-modify-playback-state',
+        'user-read-recently-played',
       ], // the scopes you need to access
       serviceConfiguration: {
         authorizationEndpoint: 'https://accounts.spotify.com/authorize',

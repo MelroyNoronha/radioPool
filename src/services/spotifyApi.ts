@@ -2,34 +2,13 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 import {RootState} from '@redux/store';
 import {removeUserSession} from '@redux/auth/authSlice';
-import {SPOTIFY_API_BASE_URL, SPOTIFY_PROFILE_ENDPOINT} from '@constants';
+import {
+  SPOTIFY_API_BASE_URL,
+  SPOTIFY_PROFILE_ENDPOINT,
+  SPOTIFY_CURRENT_TRACK_ENDPOINT,
+} from '@constants/index';
 
-interface SpotifyProfile {
-  /**
-   * almost all the fields from the Spotify ProfileAPI
-   * Reference: https://developer.spotify.com/documentation/web-api/reference/get-current-users-profile
-   * Optional fields are marked with a ? because we are not using them yet
-   */
-  country: string;
-  display_name: string;
-  email: string;
-  explicit_content?: {
-    filter_enabled: boolean;
-    filter_locked: boolean;
-  };
-  external_urls?: {
-    spotify: string;
-  };
-  followers?: {
-    href: string | null;
-    total: number;
-  };
-  id: string;
-  images?: [];
-  product: 'premium' | 'free';
-  type: 'user';
-  uri: string;
-}
+import {SpotifyCurrentTrack, SpotifyProfile} from './types';
 
 const baseQueryWithAuth = fetchBaseQuery({
   baseUrl: SPOTIFY_API_BASE_URL,
@@ -58,7 +37,10 @@ export const spotifyApi = createApi({
     getSpotifyProfile: builder.query<SpotifyProfile, void>({
       query: () => ({url: SPOTIFY_PROFILE_ENDPOINT}),
     }),
+    getCurrentTrack: builder.query<SpotifyCurrentTrack, void>({
+      query: () => ({url: SPOTIFY_CURRENT_TRACK_ENDPOINT}),
+    }),
   }),
 });
 
-export const {useGetSpotifyProfileQuery} = spotifyApi;
+export const {useGetSpotifyProfileQuery, useGetCurrentTrackQuery} = spotifyApi;
