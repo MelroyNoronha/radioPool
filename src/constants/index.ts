@@ -1,3 +1,8 @@
-export const SPOTIFY_API_BASE_URL = 'https://api.spotify.com/v1';
-export const SPOTIFY_PROFILE_ENDPOINT = '/me';
-export const SPOTIFY_CURRENT_TRACK_ENDPOINT = `${SPOTIFY_PROFILE_ENDPOINT}/player/currently-playing`;
+export const SPOTIFY_URLS = {
+  BASE: 'https://api.spotify.com/v1',
+  PROFILE: '/me',
+  CURRENT_TRACK: '/me/player/currently-playing',
+  RECENT_TRACKS: '/me/player/recently-played',
+};
+
+export const ONE_DAY_MS = 24 * 3600_000;

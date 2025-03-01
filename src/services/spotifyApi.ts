@@ -2,16 +2,16 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 import {RootState} from '@redux/store';
 import {removeUserSession} from '@redux/auth/authSlice';
-import {
-  SPOTIFY_API_BASE_URL,
-  SPOTIFY_PROFILE_ENDPOINT,
-  SPOTIFY_CURRENT_TRACK_ENDPOINT,
-} from '@constants/index';
+import {SPOTIFY_URLS} from '@constants/index';
 
-import {SpotifyCurrentTrack, SpotifyProfile} from './types';
+import {
+  SpotifyCurrentTrackResponse,
+  SpotifyProfileResponse,
+  SpotifyRecentTrackResponse,
+} from './types';
 
 const baseQueryWithAuth = fetchBaseQuery({
-  baseUrl: SPOTIFY_API_BASE_URL,
+  baseUrl: SPOTIFY_URLS.BASE,
   prepareHeaders: (headers, {getState}) => {
     const token = (getState() as RootState).auth.userSession.accessToken;
     if (token) {
@@ -34,13 +34,26 @@ export const spotifyApi = createApi({
   reducerPath: 'spotifyApi',
   baseQuery: baseQueryWithReauth,
   endpoints: builder => ({
-    getSpotifyProfile: builder.query<SpotifyProfile, void>({
-      query: () => ({url: SPOTIFY_PROFILE_ENDPOINT}),
+    getSpotifyProfile: builder.query<SpotifyProfileResponse, void>({
+      query: () => ({url: SPOTIFY_URLS.PROFILE}),
     }),
-    getCurrentTrack: builder.query<SpotifyCurrentTrack, void>({
-      query: () => ({url: SPOTIFY_CURRENT_TRACK_ENDPOINT}),
+    getCurrentTrack: builder.query<SpotifyCurrentTrackResponse, void>({
+      query: () => ({url: SPOTIFY_URLS.CURRENT_TRACK}),
+    }),
+    getRecentTracks: builder.query<
+      SpotifyRecentTrackResponse,
+      {limit?: number; after?: number}
+    >({
+      query: params => ({
+        url: SPOTIFY_URLS.RECENT_TRACKS,
+        params,
+      }),
     }),
   }),
 });
 
-export const {useGetSpotifyProfileQuery, useGetCurrentTrackQuery} = spotifyApi;
+export const {
+  useGetSpotifyProfileQuery,
+  useGetCurrentTrackQuery,
+  useGetRecentTracksQuery,
+} = spotifyApi;

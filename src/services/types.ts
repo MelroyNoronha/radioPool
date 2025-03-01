@@ -1,4 +1,4 @@
-export interface SpotifyProfile {
+export interface SpotifyProfileResponse {
   /**
    * almost all the fields from the Spotify ProfileAPI
    * Reference: https://developer.spotify.com/documentation/web-api/reference/get-current-users-profile
@@ -25,7 +25,7 @@ export interface SpotifyProfile {
   uri: string;
 }
 
-export interface SpotifyCurrentTrack {
+export interface SpotifyCurrentTrackResponse {
   /**
    * almost all the fields from the Spotify Current TrackAPI
    * Reference: https://developer.spotify.com/documentation/web-api/reference/get-information-about-the-users-current-playing-track
@@ -104,4 +104,65 @@ export interface SpotifyCurrentTrack {
     };
   };
   is_playing: boolean;
+}
+
+export interface SpotifyRecentTrack {
+  track: {
+    album: {
+      external_urls: {
+        spotify: string;
+      };
+      href: string;
+      id: string;
+      name: string;
+      type: string;
+      uri: string;
+      images: {
+        url: string;
+        height: number;
+        width: number;
+      }[];
+    };
+    artists: {
+      external_urls: {
+        spotify: string;
+      };
+      href: string;
+      id: string;
+      name: string;
+      type: string;
+      uri: string;
+    }[];
+    available_markets: string[];
+    disc_number: number;
+    duration_ms: number;
+    explicit: boolean;
+    external_ids: {
+      isrc: string;
+    };
+    external_urls: {
+      spotify: string;
+    };
+    href: string;
+    id: string;
+    is_local: boolean;
+    name: string;
+    popularity: number;
+    preview_url: string | null;
+    track_number: number;
+    type: string;
+    uri: string;
+  };
+  currently_playing_type: string;
+  actions: {
+    disallows: {
+      resuming: boolean;
+    };
+  };
+  is_playing: boolean;
+}
+
+export interface SpotifyRecentTrackResponse {
+  items: SpotifyRecentTrack[];
+  limit: number;
 }
