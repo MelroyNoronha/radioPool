@@ -7,6 +7,7 @@ import {SPOTIFY_URLS} from '@constants/index';
 import {
   SpotifyCurrentTrackResponse,
   SpotifyProfileResponse,
+  SpotifyRecentTrackParams,
   SpotifyRecentTrackResponse,
 } from './types';
 
@@ -42,7 +43,7 @@ export const spotifyApi = createApi({
     }),
     getRecentTracks: builder.query<
       SpotifyRecentTrackResponse,
-      {limit?: number; after?: number}
+      SpotifyRecentTrackParams
     >({
       query: params => ({
         url: SPOTIFY_URLS.RECENT_TRACKS,

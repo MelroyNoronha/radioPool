@@ -166,3 +166,8 @@ export interface SpotifyRecentTrackResponse {
   items: SpotifyRecentTrack[];
   limit: number;
 }
+
+export interface SpotifyRecentTrackParams {
+  limit?: number;
+  after?: number;
+}

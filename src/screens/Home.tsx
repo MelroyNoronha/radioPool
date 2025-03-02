@@ -8,25 +8,47 @@ import {
   useGetCurrentTrackQuery,
   useGetRecentTracksQuery,
 } from '@services/spotifyApi';
-import {ONE_DAY_MS} from '@constants/index';
 
 export default () => {
   const dispatch = useDispatch();
 
-  const {data: spotifyProfile, isLoading: isLoadingProfile} =
-    useGetSpotifyProfileQuery();
+  const {
+    data: spotifyProfile,
+    isLoading: isLoadingProfile,
+    isError: isErrorProfile,
+  } = useGetSpotifyProfileQuery();
 
-  const {data: currentTrack, isLoading: isCurrentTrackLoading} =
-    useGetCurrentTrackQuery(undefined, {pollingInterval: 5000});
+  const {
+    data: currentTrack,
+    isLoading: isCurrentTrackLoading,
+    isError: isErrorCurrentTrack,
+  } = useGetCurrentTrackQuery(undefined, {pollingInterval: 5000});
 
-  const {data: recentTracks, isLoading: isRecentTracksLoading} =
-    useGetRecentTracksQuery(
-      {limit: 1, after: Math.floor((Date.now() - ONE_DAY_MS) / 1000)},
-      {pollingInterval: 5000},
-    );
+  const {
+    data: recentTracks,
+    isLoading: isRecentTracksLoading,
+    isError: isErrorRecentTracks,
+  } = useGetRecentTracksQuery({limit: 1}, {pollingInterval: 5000});
 
   const isLoading =
     isLoadingProfile || isCurrentTrackLoading || isRecentTracksLoading;
+
+  const isError = isErrorProfile || isErrorCurrentTrack || isErrorRecentTracks;
+
+  const trackName =
+    currentTrack?.item?.name ||
+    recentTracks?.items[0]?.track?.name ||
+    'No track found';
+
+  const imageSource =
+    currentTrack?.item?.album?.images[1]?.url ||
+    recentTracks?.items[0]?.track?.album?.images[1]?.url;
+
+  const artistName =
+    currentTrack?.item?.album?.artists?.map(artist => artist.name).join(', ') ||
+    recentTracks?.items[0]?.track?.artists
+      .map(artist => artist.name)
+      .join(', ');
 
   const logOut = useCallback(() => {
     dispatch(removeUserSession());
@@ -40,16 +62,13 @@ export default () => {
     );
   }
 
-  const trackName =
-    currentTrack?.item?.name || recentTracks?.items[0]?.track?.name;
-  const imageSource =
-    currentTrack?.item?.album.images[1].url ||
-    recentTracks?.items[0]?.track?.album.images[1].url;
-  const artistName =
-    currentTrack?.item?.album.artists.map(artist => artist.name).join(', ') ||
-    recentTracks?.items[0]?.track?.artists
-      .map(artist => artist.name)
-      .join(', ');
+  if (isError) {
+    return (
+      <View style={styles.container}>
+        <Text>Something went wrong :/</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
