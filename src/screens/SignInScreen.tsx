@@ -1,5 +1,5 @@
-import React from 'react';
-import {SafeAreaView, Button} from 'react-native';
+import React, {useState} from 'react';
+import {SafeAreaView, Button, ActivityIndicator} from 'react-native';
 import {SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET} from '@env';
 import {authorize} from 'react-native-app-auth';
 import {useDispatch} from 'react-redux';
@@ -9,7 +9,10 @@ import {setUserSession} from '@redux/auth/authSlice';
 export default () => {
   const dispatch = useDispatch();
 
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+
   const signInToSpotify = async () => {
+    setIsLoggingIn(true);
     const config = {
       clientId: SPOTIFY_CLIENT_ID,
       clientSecret: SPOTIFY_CLIENT_SECRET,
@@ -37,11 +40,17 @@ export default () => {
     } catch (err) {
       console.error(err);
     }
+
+    setIsLoggingIn(false);
   };
 
   return (
     <SafeAreaView>
-      <Button onPress={signInToSpotify} title={'Sign in to Spotify'} />
+      {isLoggingIn ? (
+        <ActivityIndicator />
+      ) : (
+        <Button onPress={signInToSpotify} title={'Sign in to Spotify'} />
+      )}
     </SafeAreaView>
   );
 };
