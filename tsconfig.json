@@ -6,7 +6,9 @@
       "@/*": ["src/*"],
       "@/components": ["src/components/*"],
       "@/navigators": ["src/navigators/*"],
-      "@/screens": ["src/screens/*"]
+      "@/screens": ["src/screens/*"],
+      "@/utils": ["src/utils/*"],
+      "@/hooks": ["src/hooks/*"]
     }
   }
 }
