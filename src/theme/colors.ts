@@ -1,4 +1,4 @@
-import { ThemeValues, Theme } from '@/theme/types';
+import { ThemeValues, Theme } from '@/theme';
 
 const colors = {
   primary: '#5271ff',
