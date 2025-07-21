@@ -4,11 +4,12 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@/components": ["src/components/*"],
+      "@/components": ["src/components/index.ts"],
       "@/navigators": ["src/navigators/*"],
       "@/screens": ["src/screens/*"],
       "@/utils": ["src/utils/*"],
-      "@/hooks": ["src/hooks/*"]
+      "@/hooks": ["src/hooks/*"],
+      "@/theme": ["src/theme/index.ts"]
     }
   }
 }
