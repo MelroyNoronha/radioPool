@@ -8,11 +8,12 @@ module.exports = {
         extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx'],
         alias: {
           '@/src': './src',
-          '@/components': './src/components',
+          '@/components': './src/components/index.ts',
           '@/navigators': './src/navigators',
           '@/screens': './src/screens',
           '@/utils': './src/utils',
           '@/hooks': './src/hooks',
+          '@/theme': './src/theme/index.ts',
         },
       },
     ],
