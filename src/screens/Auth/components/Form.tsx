@@ -3,6 +3,7 @@ import { StyleSheet, View, Platform } from 'react-native';
 import { Button, TextInput, PressableText, Text } from '@/components';
 import { spacings, ThemeValues } from '@/theme';
 import useKeyboardHeight from '@/hooks/useKeyboardHeight';
+import { useMemo } from 'react';
 
 interface FormProps {
   currentTheme?: ThemeValues;
@@ -10,7 +11,7 @@ interface FormProps {
 
 const Form = ({}: FormProps) => {
   const keyboardHeight = useKeyboardHeight();
-  const styles = getStyles(keyboardHeight);
+  const styles = useMemo(() => getStyles(keyboardHeight), [keyboardHeight]);
 
   return (
     <View style={styles.container}>
