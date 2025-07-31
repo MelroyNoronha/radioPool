@@ -4,14 +4,21 @@ export enum ThemeValues {
 }
 
 export interface ThemeColors {
-  primary: string;
   text: {
     default: string;
     subtle: string;
     button: string;
     link: string;
+    error: string;
   };
-  background: string;
+  background: {
+    default: string;
+    button: string;
+  };
+  border: {
+    default: string;
+    error: string;
+  };
 }
 
 export interface Theme {

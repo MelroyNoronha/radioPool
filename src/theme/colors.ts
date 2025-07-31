@@ -1,10 +1,12 @@
-import { ThemeValues, Theme } from '@/theme';
+import { ThemeValues, Theme } from './types';
 
 const colors = {
   primary: '#5271ff',
-  white: '#fff',
-  black: '#000',
-  grey: '#ddd',
+  white: '#fffffa',
+  black: '#0d1321',
+  grey: '#bcccdc',
+  red: '#ef2d56',
+  green: '#0cce6b',
 };
 
 const theme: Theme = {
@@ -14,9 +16,16 @@ const theme: Theme = {
       subtle: colors.grey,
       button: colors.white,
       link: colors.primary,
+      error: colors.red,
     },
-    background: colors.black,
-    primary: colors.primary,
+    background: {
+      default: colors.black,
+      button: colors.primary,
+    },
+    border: {
+      default: colors.primary,
+      error: colors.red,
+    },
   },
   [ThemeValues.light]: {
     text: {
@@ -24,9 +33,16 @@ const theme: Theme = {
       subtle: colors.grey,
       button: colors.white,
       link: colors.primary,
+      error: colors.red,
     },
-    background: colors.white,
-    primary: colors.primary,
+    background: {
+      default: colors.white,
+      button: colors.primary,
+    },
+    border: {
+      default: colors.primary,
+      error: colors.red,
+    },
   },
 };
 

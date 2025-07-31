@@ -34,7 +34,7 @@ const getStyles = (currentTheme: ThemeValues) => {
   return StyleSheet.create({
     container: {
       width: '100%',
-      backgroundColor: colors[currentTheme].primary,
+      backgroundColor: colors[currentTheme].background.button,
       padding: spacings.small,
       borderRadius: fontSizes.large,
       alignItems: 'center',
