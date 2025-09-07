@@ -30,8 +30,4 @@ const useIsAuthenticated = () => {
   return isAuthenticated;
 };
 
-const useIsNotAuthenticated = () => {
-  return !useIsAuthenticated();
-};
-
-export { useIsAuthenticated, useIsNotAuthenticated };
+export { useIsAuthenticated };
