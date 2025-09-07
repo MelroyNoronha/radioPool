@@ -11,15 +11,17 @@ import { Text } from '@/components';
 interface TextInput extends DefaultTextInputProps {
   label: string;
   currentTheme?: ThemeValues;
+  error?: string;
 }
 
 const TextInput = ({
   label,
   currentTheme = ThemeValues.light,
   style,
+  error,
   ...otherProps
 }: TextInput) => {
-  const styles = getStyles(currentTheme);
+  const styles = getStyles(currentTheme, error);
 
   return (
     <View style={styles.container}>
@@ -32,11 +34,16 @@ const TextInput = ({
         placeholderTextColor={colors[currentTheme].text.subtle}
         {...otherProps}
       />
+      {error && (
+        <Text size="small" color="error" style={styles.errorText}>
+          {error}
+        </Text>
+      )}
     </View>
   );
 };
 
-const getStyles = (currentTheme: ThemeValues) => {
+const getStyles = (currentTheme: ThemeValues, error?: string) => {
   return StyleSheet.create({
     container: {
       flex: 1,
@@ -45,9 +52,14 @@ const getStyles = (currentTheme: ThemeValues) => {
       paddingHorizontal: spacings.small,
       paddingVertical: spacings.small,
       borderBottomWidth: 1,
-      borderBottomColor: colors[currentTheme].primary,
+      borderBottomColor: error
+        ? colors[currentTheme].border.error
+        : colors[currentTheme].border.default,
       fontSize: fontSizes.medium,
       color: colors[currentTheme].text.default,
+    },
+    errorText: {
+      marginTop: spacings.small,
     },
   });
 };
